@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz - Question 1</title>
+  <link rel="stylesheet" href="Quiz questions.css">
+</head>
+<body>
+
+  <!-- Audio element to include the sound file -->
+  <audio id="quizSound" src="hello-87032.mp3"></audio>
+
+  <div class="background-container1"></div> <!-- Background container -->
+  <div class="parent-container">
+    <img src="Song Song.png" alt="Mascot Image" class="mascot-image">
+    <div class="quiz-container">
+      <h1>Question 1</h1>
+      <h2>You're strolling along the streets when suddenly you're approached by a mascot, who introduces himself as Song Song. 
+        How do you react?
+      </h2><br>
+      <form id="quizForm">
+        <label>
+          <input type="radio" name="q1" value="10"> Greet him back enthusiastically. I'm always happy to make new friends!
+        </label><br>
+        <label>
+          <input type="radio" name="q1" value="5"> I must be in a fever dream. I'll go along with the flow.
+        </label><br>
+        <label>
+          <input type="radio" name="q1" value="0"> Be cautious and wary. Where did he come from?!
+        </label><br>
+        <button type="submit">Next</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Handle form submission, play the sound, and store the selected answer
+    document.getElementById("quizForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      const selectedOption = document.querySelector('input[name="q1"]:checked');
+
+      if (selectedOption) {
+        localStorage.setItem("q1", selectedOption.value);
+        var sound = document.getElementById("quizSound");
+
+        sound.volume = 0.5; // 50% of the full volume
+
+
+        // Play the sound effect
+        var playPromise = sound.play();
+
+        // Handling the promise rejection due to autoplay restrictions
+        if (playPromise !== undefined) {
+          playPromise.then(() => {
+            // Audio playback started
+            console.log("Audio is playing successfully");
+
+            // Redirect to the next question after the sound finishes playing
+            sound.onended = function() {
+              window.location.href = "Quiz question 2.html";  // Redirects to Quiz question 2.html
+            };
+          }).catch(error => {
+            // Audio playback was prevented or failed
+            console.error("Audio playback failed:", error);
+            
+            // Fallback: Redirect immediately if audio playback fails
+            window.location.href = "Quiz question 2.html";  // Redirects to Quiz question 2.html
+          });
+        }
+      } else {
+        alert("Please select an answer before proceeding.");
+      }
+    });
+  </script>
+  
+</body>
+</html>

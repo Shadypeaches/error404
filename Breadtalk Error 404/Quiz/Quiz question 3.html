@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz - Question 3</title>
+  <link rel="stylesheet" href="Quiz questions.css">
+</head>
+<body>
+    <div class="background-container3"></div> <!-- Background container -->
+
+    <!-- Audio element to include the sound file -->
+    <audio id="quizSound" src="danger-203290.mp3"></audio>
+
+    <div class="quiz-container">
+      <h1>Question 3</h1>
+      <h2>You realise a giant hand is coming towards you. What does your instinct tell you to do?</h2><br>
+      <form id="quizForm">
+        <label>
+          <input type="radio" name="q3" value="10"> Protect Song Song! I can't let someone else get hurt on my watch.
+        </label><br>
+        <label>
+          <input type="radio" name="q3" value="5"> Freeze. I'm petrified. 
+        </label><br>
+        <label>
+          <input type="radio" name="q3" value="0"> I sprint away as fast as my legs will take me. 
+        </label><br>
+        <button type="submit">Next</button>
+      </form>
+    </div>
+
+    <script>
+      document.getElementById("quizForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        const selectedOption = document.querySelector('input[name="q3"]:checked');
+        if (selectedOption) {
+          localStorage.setItem("q3", selectedOption.value);
+          var sound = document.getElementById("quizSound");
+
+          sound.volume = 0.3; // 30% of the full volume
+
+
+          // Play the sound effect
+          var playPromise = sound.play();
+
+          if (playPromise !== undefined) {
+            playPromise.then(() => {
+              console.log("Audio is playing successfully");
+
+              // Set a timeout to stop the audio after 3 seconds
+              setTimeout(() => {
+                sound.pause();
+                sound.currentTime = 0; // Reset to start of the audio
+                window.location.href = "Quiz question 4.html";  // Redirects to question 4
+              }, 3000); // 3000 milliseconds = 3 seconds
+            }).catch(error => {
+              console.error("Audio playback failed:", error);
+              // Fallback: Redirect immediately if audio playback fails
+              window.location.href = "Quiz question 4.html";  // Redirects to question 4
+            });
+          }
+        } else {
+          alert("Please select an answer before proceeding.");
+        }
+      });
+    </script>
+</body>
+</html>

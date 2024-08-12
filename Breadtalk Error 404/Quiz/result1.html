@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Result</title>
+  <link rel="stylesheet" href="Quiz questions.css">
+</head>
+<body>
+
+
+  <div class="quiz-container">
+    <h1>Congratulations!</h1>
+    <img src="Berry lovely donut.jpeg" width="300" style="height: auto; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+    <h2>You're a Berry Lovely donut..</h2>
+    <p>Coated with strawberry chocolate and rainbow sprinkles, you're a bundle of joy. Sweet as ever, your caring nature allows you to click with other people easily and always look out for them. Remember to still take time for yourself and don't burn yourself out.</p>
+    <button onclick="window.location.href='https://www.breadtalk.com.sg/'">Return to BreadTalk</button>
+  </div>
+
+  <div id="couponModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Congratulations! Here's Your Discount Coupon</h2>
+      <p>Use code <strong>SAVE10</strong> to get 10% off your next purchase!</p>
+    </div>
+  </div>
+
+  <script>
+    var modal = document.getElementById("couponModal");
+    var span = document.getElementsByClassName("close")[0];
+
+    window.onload = function() {
+      modal.style.display = "block";
+    }
+
+    span.onclick = function() {
+      modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+  </script>
+</body>
+</html>
